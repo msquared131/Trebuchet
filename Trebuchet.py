@@ -1,3 +1,5 @@
+import os
+
 def convertToNumber(number):
     if number.isnumeric():
         return int(number)
@@ -24,8 +26,15 @@ def convertToNumber(number):
 sum = 0
 numbersToFind = ["1", "one", "2", "two", "3", "three", "4", "four", "5", "five", "6",
                  "six", "7", "seven", "8", "eight", "9", "nine"]
-
-with open("TrebuchetInput.txt", "r", encoding="utf-8") as f:
+fileName = ""
+while os.path.isfile(fileName) == False:
+    fileName = input("Input File:")
+    if os.path.isfile(fileName):
+        break
+    else:
+        print("Invalid filename")
+    
+with open(fileName, "r", encoding="utf-8") as f:
     for line in f:
         numbers = []
         for s in numbersToFind:
@@ -39,4 +48,3 @@ with open("TrebuchetInput.txt", "r", encoding="utf-8") as f:
         numberToAdd = convertToNumber(sorted_list[0][1]) * 10 + convertToNumber(sorted_list[-1][1])
         sum += numberToAdd
     print(sum)
-
